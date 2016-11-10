@@ -10,7 +10,6 @@ Mako==1.0.6
 MarkupSafe==0.23
 mccabe==0.5.2
 PasteDeploy==1.5.2
--e git+git@github.com:cdmb/pergunta-camara.git@778a8db99598212c539663c738e51659ae22af30#egg=pergunta_camara
 pexpect==4.2.1
 pickleshare==0.7.4
 prompt-toolkit==1.0.9
