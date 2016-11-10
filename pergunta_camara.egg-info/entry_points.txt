@@ -1,5 +1,0 @@
-      [paste.app_factory]
-      main = pergunta_camara:main
-      [console_scripts]
-      initialize_pergunta-camara_db = pergunta_camara.scripts.initializedb:main
-      
