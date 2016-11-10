@@ -1,0 +1,3 @@
+[run]
+source = pergunta_camara
+omit = pergunta_camara/test*
