@@ -5,4 +5,6 @@ from sqlalchemy.orm import configure_mappers
 
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
+from users.models import User  # noqa
+
 configure_mappers()
