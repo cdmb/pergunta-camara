@@ -9,7 +9,6 @@ Mako==1.0.6
 MarkupSafe==0.23
 nose==1.3.7
 PasteDeploy==1.5.2
--e git+https://github.com/cdmb/pergunta-camara@080d32f93bb23603843cb56748eec11c1a6c3b14#egg=pergunta_camara
 pkg-resources==0.0.0
 psycopg2==2.6.2
 Pygments==2.1.3
