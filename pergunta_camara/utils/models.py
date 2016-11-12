@@ -46,6 +46,7 @@ def get_current_ip():
         return get_current_request().client_addr
     except AttributeError as exc:
         logger.exception('Error trying to get the current ip.', exc_info=exc)
+        pass
 
 
 def get_current_user():
@@ -54,6 +55,7 @@ def get_current_user():
         return get_current_request().user.id
     except AttributeError as exc:
         logger.exception('Error trying to get the current user', exc_info=exc)
+        pass
 
 
 class CreatedUpdatedMixin:

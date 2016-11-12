@@ -1,6 +1,20 @@
-import sqlalchemy as sa
+import logging
 
-from pergunta_camara.utils.models import Base, CreatedUpdatedMixin
+import sqlalchemy as sa
+from cryptacular import pbkdf2
+from sqlalchemy import orm
+from sqlalchemy.orm.exc import NoResultFound
+
+from pergunta_camara.utils.models import Base
+from pergunta_camara.utils.models import CreatedUpdatedMixin
+from pergunta_camara.utils.models import DBSession
+from pergunta_camara.utils.models import get_uuid
+
+logger = logging.getLogger(__name__)
+
+
+def _get_password_manager():
+    return pbkdf2.PBKDF2PasswordManager()
 
 
 class User(Base, CreatedUpdatedMixin):
@@ -8,8 +22,37 @@ class User(Base, CreatedUpdatedMixin):
     __tablename__ = 'user'
 
     id = sa.Column(sa.Integer, primary_key=True)
-    uuid = sa.Column(sa.String(32), nullable=False, unique=True)
+    uuid = sa.Column(
+        sa.String(32), nullable=False, unique=True, default=get_uuid
+    )
 
     username = sa.Column(sa.String(200), nullable=False, index=True)
-    password = sa.Column(sa.String(200))
+    password_ = sa.Column(sa.String(200))
     email = sa.Column(sa.String(200), nullable=False, index=True)
+
+    @property
+    def password(self):
+        return self.password_
+
+    @password.setter
+    def password(self, password):
+        self.password_ = _get_password_manager().encode(password)
+
+    password = orm.synonym('password_', descriptor=password)
+
+    def _check_password(self, password_to_check):
+        return _get_password_manager().check(self.password, password_to_check)
+
+    @classmethod
+    def get_user(cls, username):
+
+        try:
+            user = DBSession.query(cls).filter_by(username=username).one()
+        except NoResultFound as exc:
+            logger.info(
+                'No user found for the username: {!r}'.format(username),
+                exc_info=exc
+            )
+            user = None
+
+        return user
