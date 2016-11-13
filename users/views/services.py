@@ -8,15 +8,6 @@ class Users:
         self.request = request
         self.view_name = 'Users'
 
-
-    @view_config(route_name='desc')
-    def descript_users(self):
-        return {'msg': 'Olá'}
-
-    @view_config(route_name='list_users', request_method='GET')
-    def list_all_users(self):
-        return [{'id': '1', 'username': 'foo'}]
-
-    @view_config(route_name='create_user', request_method='POST')
-    def create_user(self):
-        return {2: 3}
+    @view_config(route_name='create_users', request_method='GET', permission='create')
+    def create(self):
+        return {'result': 'ok'}

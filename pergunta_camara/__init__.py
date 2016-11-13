@@ -9,7 +9,7 @@ def main(global_config, **settings):
 
     # Including internal sub apps
     config.include('users', route_prefix='/api')
-    config.include('security')
+    config.include('.security')
 
     config.scan()
 
