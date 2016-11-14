@@ -8,6 +8,6 @@ class Users:
         self.request = request
         self.view_name = 'Users'
 
-    @view_config(route_name='create_users', request_method='GET')
+    @view_config(route_name='create_users', request_method='POST')
     def create(self):
         return {'result': 'ok'}

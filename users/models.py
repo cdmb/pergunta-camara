@@ -30,6 +30,16 @@ class User(Base, CreatedUpdatedMixin):
     password_ = sa.Column(sa.String(200))
     email = sa.Column(sa.String(200), nullable=False, index=True)
 
+    def __json__(self, to_ignore=None):
+        return {
+            c: getattr(self, c)
+            for c in self.columns if c not in (to_ignore or [])
+        }
+
+    @property
+    def columns(self):
+        return [c.name for c in self.__table__.columns]
+
     @property
     def password(self):
         return self.password_

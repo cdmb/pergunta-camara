@@ -31,6 +31,34 @@ class PasswordManagerTestCase(MinimalTestCase):
 
 class UserTestCase(BaseTestCase):
 
+    def test_get_columns(self):
+
+        user = User()
+
+        self.assertListEqual(
+            user.columns, [c.name for c in user.__table__.columns]
+        )
+
+    def test_dunder_json_all_attributes(self):
+
+        user = User()
+
+        expected_result = {c: getattr(user, c) for c in user.columns}
+
+        self.assertDictEqual(user.__json__(), expected_result)
+
+    def test_dunder_json_and_ignore_some_columns(self):
+
+        user = User(email='foo@bar.com')
+
+        to_ignore = 'id', 'uuid', 'password'
+
+        expected_result = {
+            c: getattr(user, c) for c in user.columns if c not in to_ignore
+        }
+
+        self.assertDictEqual(user.__json__(to_ignore), expected_result)
+
     def test_exceptions_when_username_is_none(self):
 
         user = UserFactory(username=None)

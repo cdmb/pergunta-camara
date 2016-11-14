@@ -28,7 +28,7 @@ def authenticate_user(username, password):
             'There is no user for the username {!r}'.format(username)
         )
 
-    if not user.check_password(password):
+    if not user._check_password(password):
 
         logger.warning(
             '[authenticate_user] Invalid password: {!r}'.format(password)
