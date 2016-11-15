@@ -1,6 +1,7 @@
 alembic==0.8.8
 beautifulsoup4==4.5.1
 bravado-core==4.5.1
+cryptacular==1.4.1
 factory-boy==2.7.0
 fake-factory==0.7.2
 Jinja2==2.8
@@ -9,6 +10,8 @@ Mako==1.0.6
 MarkupSafe==0.23
 nose==1.3.7
 PasteDeploy==1.5.2
+pbkdf2==1.3
+-e git+https://github.com/cdmb/pergunta-camara@6bd347f4b19f9eeef390d773889aaa55bb359c9e#egg=pergunta_camara
 pkg-resources==0.0.0
 psycopg2==2.6.2
 Pygments==2.1.3
