@@ -6,6 +6,7 @@ from sqlalchemy.orm import configure_mappers
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
 from users.models import User  # noqa
-from profiles.models import Profile  # noqa
+from profiles.models import Councillor, Profile  # noqa
 from communications.models import Communication, Message  # noqa
+
 configure_mappers()
