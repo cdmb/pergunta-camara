@@ -7,5 +7,5 @@ from sqlalchemy.orm import configure_mappers
 # all relationships can be setup
 from users.models import User  # noqa
 from profiles.models import Profile  # noqa
-
+from communications.models import Communication, Message  # noqa
 configure_mappers()
